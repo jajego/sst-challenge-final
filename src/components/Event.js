@@ -1,12 +1,16 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import EventDetails from "./EventDetails";
-import { randomColor } from "randomcolor";
 
-export default function Event({ startTime, endTime, width, offset, index }) {
-  //   console.log(`My width is ${width}% and my offset is ${offset}%`);
+export default function Event({
+  color,
+  startTime,
+  endTime,
+  width,
+  offset,
+  index,
+}) {
   const [isHovering, setIsHovering] = useState(false);
-  const [color, setColor] = useState(randomColor());
   const handleMouseOver = () => {
     setIsHovering(true);
   };

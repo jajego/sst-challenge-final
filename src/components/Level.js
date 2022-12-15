@@ -1,5 +1,6 @@
 import React from "react";
 import Event from "./Event";
+import { randomColor } from "randomcolor";
 
 export default function Level({ level, events }) {
   const calcEventWidths = (events) => {
@@ -28,7 +29,7 @@ export default function Level({ level, events }) {
   };
 
   let eventWidths = calcEventWidths(events);
-
+  const color = randomColor();
   return (
     <div className="flex items-center">
       <div className="text-s mr-3 text-center font-bold leading-8 rounded-full text-blue-600 bg-gray-200 w-8 h-8">
@@ -42,6 +43,7 @@ export default function Level({ level, events }) {
             startTime={event.startTime}
             endTime={event.endTime}
             index={event.index}
+            color={color}
           />
         ))}
         <div className="line-container"></div>
