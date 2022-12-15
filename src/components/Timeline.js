@@ -15,7 +15,7 @@ export default function Timeline({ levels }) {
         <div className="font-bold axis-label text-red-400">54,000</div>
         <div className="font-bold axis-label text-red-400">64,800</div>
         <div className="font-bold axis-label text-red-400">75,600</div> */}
-        <div className="font-bold axis-label -mr-6">86,400</div>
+        <div className="font-bold axis-label -mr-6">86400</div>
       </div>
       {levels[0].events.length > 0 &&
         levels.map((level, i) => (

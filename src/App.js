@@ -62,12 +62,15 @@ function App() {
   }, [events]);
 
   const randomize = () => {
+    setFormOpen(false);
+
     return setEvents(generateInput(50));
   };
 
   const resetTimeline = () => {
     setLevels([]);
     setEvents([]);
+    setFormOpen(false);
   };
 
   const handleFormOpen = () => {
@@ -85,7 +88,7 @@ function App() {
                   bg-white focus:shadow-md focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg"
           onClick={randomize}
         >
-          Add 50 events
+          Randomize
         </button>
         <button
           className="inline-block w-1/8 px-4 py-2 font-medium border border-2 border-gray rounded 

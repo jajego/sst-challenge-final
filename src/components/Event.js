@@ -18,7 +18,7 @@ export default function Event({ startTime, endTime, width, offset, index }) {
   useEffect(() => {});
   return (
     <div
-      className="event"
+      className="event hover:shadow-md"
       style={{
         position: "relative",
         width: width + "%",
