@@ -50,7 +50,6 @@ const input = [
 ];
 
 const generateInput = (howMany) => {
-  console.log(`Generating ${howMany} inputs...`);
   let input = [];
   for (let i = 0; i < howMany; i++) {
     let startTime = Math.floor(Math.random() * 80000);
@@ -67,7 +66,6 @@ function handleInput(input) {
   let levels = [];
 
   const findNearestOpenLevel = (event, levels) => {
-    // Currently creating overlap when an event starts before and ends after its preceding event
     let openLevel;
     for (let level of levels) {
       if (checkLevelOverlap(event, level)) {
@@ -109,14 +107,10 @@ function handleInput(input) {
     );
   };
 
-  console.time("goku");
   for (let event of input) {
     findNearestOpenLevel(event, levels);
   }
-  console.timeEnd("goku");
-  console.log(`${levels.length} levels created`);
 
-  // console.log(levels);
   return levels;
 }
 

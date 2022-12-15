@@ -2,8 +2,6 @@ import React from "react";
 import Level from "./Level";
 
 export default function Timeline({ levels }) {
-  console.log(`Levels:`);
-  console.log(levels);
   return (
     <div className="levels-wrapper flex flex-col-reverse justify-start content-center bg-white shadow-sm rounded-md px-16 py-7 pt-12 w-4/5 gap-5 max-h-[800px] overflow-auto">
       <div className="axis-wrapper flex justify-between w-full gap-0">
