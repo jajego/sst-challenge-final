@@ -1,8 +1,10 @@
 import React from "react";
+import { useState } from "react";
 import Event from "./Event";
 import { randomColor } from "randomcolor";
 
 export default function Level({ level, events }) {
+  const [color, setColor] = useState(randomColor());
   const calcEventWidths = (events) => {
     // It should check whether it has a neighbor or not
     let eventWidths = [
@@ -29,7 +31,7 @@ export default function Level({ level, events }) {
   };
 
   let eventWidths = calcEventWidths(events);
-  const color = randomColor();
+  // const color = randomColor();
   return (
     <div className="flex items-center">
       <div className="text-s mr-3 text-center font-bold leading-8 rounded-full text-blue-600 bg-gray-200 w-8 h-8">

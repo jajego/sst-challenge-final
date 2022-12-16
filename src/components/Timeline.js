@@ -3,7 +3,7 @@ import Level from "./Level";
 
 export default function Timeline({ levels }) {
   return (
-    <div className="levels-wrapper flex flex-col-reverse justify-start content-center bg-white shadow-sm rounded-md px-16 py-7 pt-12 w-4/5 gap-5 max-h-[800px] overflow-auto">
+    <div className="levels-wrapper flex flex-col-reverse justify-start content-center bg-white shadow-sm rounded-md px-16 py-7 pt-12 w-4/5 gap-5">
       <div className="axis-wrapper flex justify-between w-full gap-0">
         <div className="font-bold axis-label ml-10">0</div>
         {/* <div className="font-bold axis-label text-red-400">10,800</div>

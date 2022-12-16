@@ -13,6 +13,9 @@ const generateInput = (howMany) => {
 
 function handleInput(input) {
   let levels = [];
+  let unplacedEvents = [];
+
+  // recursion?
 
   const findNearestOpenLevel = (event, levels) => {
     let openLevel;
