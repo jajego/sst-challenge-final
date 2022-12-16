@@ -11,30 +11,46 @@ const generateInput = (howMany) => {
   return input;
 };
 
-function handleInput(input) {
-  let levels = [];
-  let unplacedEvents = [];
+function handleInput(events) {
+  console.time("timeToSort");
 
-  // recursion?
+  let levels = [{ level: 0, events: [] }];
 
-  const findNearestOpenLevel = (event, levels) => {
-    let openLevel;
-    for (let level of levels) {
-      if (checkLevelOverlap(event, level)) {
-        continue;
+  let sortedEvents = events.sort(
+    (a, b) => a.endTime - a.startTime - (b.endTime - b.startTime)
+  );
+
+  const fillLevel = (events, level) => {
+    let unplacedEvents = [];
+    for (let i = 0; i < events.length; i++) {
+      if (canInsert(events[i], level)) {
+        level.events.push(events[i]);
       } else {
-        openLevel = level.level;
-        break;
+        unplacedEvents.push(events[i]);
       }
     }
-    if (openLevel === undefined) {
-      levels.push({
-        level: levels.length,
-        events: [event],
-      });
-    } else {
-      levels[openLevel].events.push(event);
+
+    return unplacedEvents;
+  };
+
+  const fillLevels = (events, levels) => {
+    if (events.length === 0) {
+      return levels;
     }
+
+    let unplacedEvents = fillLevel(events, levels[levels.length - 1]);
+
+    if (unplacedEvents.length > 0) {
+      levels.push({ level: levels.length, events: [] });
+    }
+    return fillLevels(unplacedEvents, levels);
+  };
+
+  const canInsert = (event, level) => {
+    if (checkLevelOverlap(event, level)) {
+      return false;
+    }
+    return true;
   };
 
   const checkLevelOverlap = (event, level) => {
@@ -59,12 +75,12 @@ function handleInput(input) {
     );
   };
 
-  for (let event of input) {
-    findNearestOpenLevel(event, levels);
-  }
-
+  levels = fillLevels(sortedEvents, levels);
+  console.timeEnd("timeToSort");
   return levels;
 }
+
+handleInput(generateInput(100));
 
 module.exports = {
   generateInput,
