@@ -13,13 +13,12 @@ const generateInput = (howMany) => {
 
 function handleInput(events) {
   console.time("timeToSort");
-
   let levels = [{ level: 0, events: [] }];
 
   const fillLevel = (events, level) => {
     let unplacedEvents = [];
     for (let i = 0; i < events.length; i++) {
-      if (canInsert(events[i], level)) {
+      if (!checkLevelOverlap(events[i], level)) {
         level.events.push(events[i]);
       } else {
         unplacedEvents.push(events[i]);
@@ -27,26 +26,6 @@ function handleInput(events) {
     }
 
     return unplacedEvents;
-  };
-
-  // const fillLevels = (events, levels) => {
-  //   if (events.length === 0) {
-  //     return levels;
-  //   }
-
-  //   let unplacedEvents = fillLevel(events, levels[levels.length - 1]);
-
-  //   if (unplacedEvents.length > 0) {
-  //     levels.push({ level: levels.length, events: [] });
-  //   }
-  //   return fillLevels(unplacedEvents, levels);
-  // };
-
-  const canInsert = (event, level) => {
-    if (checkLevelOverlap(event, level)) {
-      return false;
-    }
-    return true;
   };
 
   const checkLevelOverlap = (event, level) => {
