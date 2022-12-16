@@ -4,56 +4,10 @@ import AddEventForm from "./components/AddEventForm";
 import Timeline from "./components/Timeline";
 import { generateInput, handleInput } from "./utils/eventUtils";
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <AddEventForm />
-//       <Timeline />
-//     </div>
-//   );
-// }
-
 function App() {
   const [events, setEvents] = useState([]);
   const [levels, setLevels] = useState([]);
   const [formOpen, setFormOpen] = useState(false);
-  const [newEventStart, setNewEventStart] = useState();
-  const [newEventEnd, setNewEventEnd] = useState();
-
-  const addEvent = (e) => {
-    e.preventDefault();
-    console.log("button clicked", e.target);
-    // if (
-    //   newEventStart < 0 ||
-    //   newEventStart > 86399 ||
-    //   newEventEnd < 0 ||
-    //   newEventEnd > 86400 ||
-    //   newEventStart > newEventEnd
-    // ) {
-    //   alert(
-    //     "Numbers must be between 0 and 86399, and Finish must be larger than Start."
-    //   );
-    // } else {
-    setEvents([
-      ...events,
-      {
-        startTime: Number(newEventStart),
-        endTime: Number(newEventEnd),
-        index: events.length,
-      },
-    ]);
-    // }
-    setNewEventStart("");
-    setNewEventEnd("");
-    setFormOpen(false);
-  };
-
-  const handleStartChange = (e) => {
-    setNewEventStart(e.target.value);
-  };
-  const handleEndChange = (e) => {
-    setNewEventEnd(e.target.value);
-  };
 
   useEffect(() => {
     if (events.length > 0) {
@@ -64,7 +18,7 @@ function App() {
   const randomize = () => {
     setFormOpen(false);
 
-    return setEvents(generateInput(250));
+    return setEvents(generateInput(50));
   };
 
   const resetTimeline = () => {
@@ -108,11 +62,9 @@ function App() {
 
       {formOpen && (
         <AddEventForm
-          addEvent={addEvent}
-          newEventStart={newEventStart}
-          handleStartChange={handleStartChange}
-          newEventEnd={newEventEnd}
-          handleEndChange={handleEndChange}
+          events={events}
+          setEvents={setEvents}
+          setFormOpen={setFormOpen}
         />
       )}
       {levels.length > 0 && <Timeline levels={levels} />}

@@ -5,17 +5,18 @@ import { randomColor } from "randomcolor";
 
 export default function Level({ level, events }) {
   const [color, setColor] = useState(randomColor());
-  const calcEventWidths = (events) => {
-    // It should check whether it has a neighbor or not
+  const calculateEventWidths = (events) => {
     let eventWidths = [
       {
-        width: secToPct(events[0].endTime - events[0].startTime),
-        offset: secToPct(events[0].startTime),
+        width: secondsToPercent(events[0].endTime - events[0].startTime),
+        offset: secondsToPercent(events[0].startTime),
       },
     ];
     for (let i = 1; i < events.length; i++) {
-      const width = secToPct(events[i].endTime - events[i].startTime);
-      const offset = secToPct(events[i].startTime - events[i - 1].endTime);
+      const width = secondsToPercent(events[i].endTime - events[i].startTime);
+      const offset = secondsToPercent(
+        events[i].startTime - events[i - 1].endTime
+      );
       eventWidths.push({
         width: width,
         offset: offset,
@@ -25,13 +26,12 @@ export default function Level({ level, events }) {
     return eventWidths;
   };
 
-  const secToPct = (sec) => {
+  const secondsToPercent = (sec) => {
     const percent = (sec / 86400) * 100;
     return percent;
   };
 
-  let eventWidths = calcEventWidths(events);
-  // const color = randomColor();
+  let eventWidths = calculateEventWidths(events);
   return (
     <div className="flex items-center">
       <div className="text-s mr-3 text-center font-bold leading-8 rounded-full text-blue-600 bg-gray-200 w-8 h-8">

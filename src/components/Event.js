@@ -32,7 +32,6 @@ export default function Event({
         paddingBottom: "10px",
         fontSize: "0.75rem",
         borderRadius: "5px",
-        // border: "2px solid black",
         zIndex: "100",
         transitionDuration: "0.1s",
         fontFamily: "Courier",

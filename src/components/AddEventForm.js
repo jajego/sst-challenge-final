@@ -1,12 +1,45 @@
 import React from "react";
+import { useState } from "react";
 
-export default function AddEventForm({
-  addEvent,
-  newEventStart,
-  handleStartChange,
-  newEventEnd,
-  handleEndChange,
-}) {
+export default function AddEventForm({ events, setEvents, setFormOpen }) {
+  const [newEventStart, setNewEventStart] = useState("");
+  const [newEventEnd, setNewEventEnd] = useState("");
+
+  const handleStartChange = (e) => {
+    setNewEventStart(e.target.value);
+  };
+  const handleEndChange = (e) => {
+    setNewEventEnd(e.target.value);
+  };
+
+  const addEvent = (e) => {
+    e.preventDefault();
+    console.log("button clicked", e.target);
+    // if (
+    //   newEventStart < 0 ||
+    //   newEventStart > 86399 ||
+    //   newEventEnd < 0 ||
+    //   newEventEnd > 86400 ||
+    //   newEventStart > newEventEnd
+    // ) {
+    //   alert(
+    //     "Numbers must be between 0 and 86399, and Finish must be larger than Start."
+    //   );
+    // } else {
+    setEvents([
+      ...events,
+      {
+        startTime: newEventStart,
+        endTime: newEventEnd,
+        index: events.length,
+      },
+    ]);
+    // }
+    setNewEventStart("");
+    setNewEventEnd("");
+    setFormOpen(false);
+  };
+
   return (
     <form
       className="flex flex-col items-center justify-center shadow-sm gap-2 rounded-md px-16 py-7 bg-white"

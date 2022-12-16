@@ -16,10 +16,6 @@ function handleInput(events) {
 
   let levels = [{ level: 0, events: [] }];
 
-  let sortedEvents = events.sort(
-    (a, b) => a.endTime - a.startTime - (b.endTime - b.startTime)
-  );
-
   const fillLevel = (events, level) => {
     let unplacedEvents = [];
     for (let i = 0; i < events.length; i++) {
@@ -33,18 +29,18 @@ function handleInput(events) {
     return unplacedEvents;
   };
 
-  const fillLevels = (events, levels) => {
-    if (events.length === 0) {
-      return levels;
-    }
+  // const fillLevels = (events, levels) => {
+  //   if (events.length === 0) {
+  //     return levels;
+  //   }
 
-    let unplacedEvents = fillLevel(events, levels[levels.length - 1]);
+  //   let unplacedEvents = fillLevel(events, levels[levels.length - 1]);
 
-    if (unplacedEvents.length > 0) {
-      levels.push({ level: levels.length, events: [] });
-    }
-    return fillLevels(unplacedEvents, levels);
-  };
+  //   if (unplacedEvents.length > 0) {
+  //     levels.push({ level: levels.length, events: [] });
+  //   }
+  //   return fillLevels(unplacedEvents, levels);
+  // };
 
   const canInsert = (event, level) => {
     if (checkLevelOverlap(event, level)) {
@@ -75,12 +71,18 @@ function handleInput(events) {
     );
   };
 
-  levels = fillLevels(sortedEvents, levels);
+  while (events.length > 0) {
+    events = fillLevel(events, levels[levels.length - 1]);
+    if (events.length !== 0) {
+      levels.push({ level: levels.length, events: [] });
+    }
+  }
+
   console.timeEnd("timeToSort");
   return levels;
 }
 
-handleInput(generateInput(100));
+handleInput(generateInput(100000));
 
 module.exports = {
   generateInput,
