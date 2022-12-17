@@ -1,4 +1,4 @@
-### How to build
+### How to start
 
 `npm install` →
 `npm start`
