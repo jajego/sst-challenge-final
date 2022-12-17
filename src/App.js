@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./index.css";
 import AddEventForm from "./components/Event/AddEventForm";
 import Timeline from "./components/Timeline";
-import { generateInput, handleInput } from "./utils/eventUtils";
+import { generateInput, sortEvents } from "./utils/eventUtils";
 
 function App() {
   const [events, setEvents] = useState([]);
@@ -11,7 +11,7 @@ function App() {
 
   useEffect(() => {
     if (events.length > 0) {
-      setLevels(handleInput(events));
+      setLevels(sortEvents(events));
     }
   }, [events]);
 

@@ -12,52 +12,12 @@ const generateInput = (howMany) => {
   return input;
 };
 
-function handleInput(events) {
+const sortEvents = (events) => {
   // Returns an array of levels
   let levels = [{ level: 0, events: [] }];
 
   // Sort events by endTime (ascending)
   events = events.sort((a, b) => a.endTime - b.endTime);
-
-  const fillLevel = (events, level) => {
-    // Returns an array of remaining events after it fills the given level
-    let endPoint = events[0].endTime;
-    level.events.push(events[0]);
-    let unplacedEvents = [];
-    for (let i = 1; i < events.length; i++) {
-      let startPoint = events[i].startTime;
-      if (startPoint >= endPoint) {
-        level.events.push(events[i]);
-        endPoint = events[i].endTime;
-      } else {
-        unplacedEvents.push(events[i]);
-      }
-    }
-    return unplacedEvents;
-  };
-
-  const checkLevelOverlap = (event, level) => {
-    // Checks each event in a level for overlap with a given event and exits the loop if it finds it
-    for (let levelEvent of level.events) {
-      if (checkEventOverlap(event, levelEvent)) {
-        return true;
-      }
-      continue;
-    }
-    return false;
-  };
-
-  const checkEventOverlap = (event, levelEvent) => {
-    // Checks for all possible overlap cases and returns a boolean
-    return (
-      (event.startTime >= levelEvent.startTime &&
-        event.startTime <= levelEvent.endTime) ||
-      (event.endTime >= levelEvent.startTime &&
-        event.endTime <= levelEvent.endTime) ||
-      (event.startTime <= levelEvent.startTime &&
-        event.endTime >= levelEvent.endTime)
-    );
-  };
 
   // Core loop. It exits when all events have been placed.
   while (events.length > 0) {
@@ -67,9 +27,26 @@ function handleInput(events) {
     }
   }
   return levels;
-}
+};
+
+const fillLevel = (events, level) => {
+  // Returns an array of remaining events after it fills the given level
+  let endPoint = events[0].endTime;
+  level.events.push(events[0]);
+  let unplacedEvents = [];
+  for (let i = 1; i < events.length; i++) {
+    let startPoint = events[i].startTime;
+    if (startPoint >= endPoint) {
+      level.events.push(events[i]);
+      endPoint = events[i].endTime;
+    } else {
+      unplacedEvents.push(events[i]);
+    }
+  }
+  return unplacedEvents;
+};
 
 module.exports = {
   generateInput,
-  handleInput,
+  sortEvents,
 };

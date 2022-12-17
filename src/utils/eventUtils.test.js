@@ -1,4 +1,4 @@
-const { generateInput, handleInput } = require("./eventUtils");
+const { generateInput, sortEvents } = require("./eventUtils");
 
 describe("Testing when events overlap", () => {
   test("When a new event starts during and ends after an event, the two events are placed on separate levels", () => {
@@ -13,7 +13,7 @@ describe("Testing when events overlap", () => {
       },
     ];
 
-    let levels = handleInput(inputs);
+    let levels = sortEvents(inputs);
     expect(levels.length).toBe(2);
     expect(levels[0].events[0]).toBe(inputs[0]);
     expect(levels[1].events[0]).toBe(inputs[1]);
@@ -31,7 +31,7 @@ describe("Testing when events overlap", () => {
       },
     ];
 
-    let levels = handleInput(inputs);
+    let levels = sortEvents(inputs);
     expect(levels.length).toBe(2);
     expect(levels[0].events[0]).toBe(inputs[0]);
     expect(levels[1].events[0]).toBe(inputs[1]);
@@ -49,7 +49,7 @@ describe("Testing when events overlap", () => {
       },
     ];
 
-    let levels = handleInput(inputs);
+    let levels = sortEvents(inputs);
     expect(levels.length).toBe(2);
     expect(levels[0].events[0]).toBe(inputs[0]);
     expect(levels[1].events[0]).toBe(inputs[1]);
@@ -67,7 +67,7 @@ describe("Testing when events overlap", () => {
       },
     ];
 
-    let levels = handleInput(inputs);
+    let levels = sortEvents(inputs);
     expect(levels.length).toBe(2);
     expect(levels[0].events[0]).toBe(inputs[0]);
     expect(levels[1].events[0]).toBe(inputs[1]);
@@ -89,7 +89,7 @@ describe("Testing when events overlap", () => {
       },
     ];
 
-    let levels = handleInput(inputs);
+    let levels = sortEvents(inputs);
     console.log(levels);
     expect(levels.length).toBe(2);
     expect(levels[0].events[0]).toBe(inputs[0]);
@@ -110,7 +110,7 @@ test("When two events don't overlap, they are placed on the same level", () => {
     },
   ];
 
-  let levels = handleInput(inputs);
+  let levels = sortEvents(inputs);
   expect(levels[0].events.length).toBe(2);
   expect(levels[0].events[0]).toBe(inputs[0]);
   expect(levels[0].events[1]).toBe(inputs[1]);
@@ -141,7 +141,7 @@ test(`When 5 events start and end at the same time, events with
     },
   ];
 
-  let levels = handleInput(inputs);
+  let levels = sortEvents(inputs);
   expect(levels[0].events[0]).toBe(inputs[0]);
   expect(levels[1].events[0]).toBe(inputs[1]);
   expect(levels[2].events[0]).toBe(inputs[2]);
