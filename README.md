@@ -1,6 +1,6 @@
 ### How to build
 
-`npm install`
+`npm install` --> 
 `npm start`
 
 ### How to run tests
