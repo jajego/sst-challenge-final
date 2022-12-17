@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./index.css";
-import AddEventForm from "./components/AddEventForm";
+import AddEventForm from "./components/Event/AddEventForm";
 import Timeline from "./components/Timeline";
 import { generateInput, handleInput } from "./utils/eventUtils";
 

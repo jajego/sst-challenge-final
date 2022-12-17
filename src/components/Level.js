@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import Event from "./Event";
+import Event from "./Event/Event";
 import { randomColor } from "randomcolor";
 
 export default function Level({ level, events }) {
