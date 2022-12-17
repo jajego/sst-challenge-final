@@ -33,7 +33,6 @@ export default function Event({
         fontSize: "0.75rem",
         borderRadius: "5px",
         zIndex: "100",
-        transitionDuration: "0.1s",
         fontFamily: "Courier",
         backgroundColor: `${color}`,
       }}

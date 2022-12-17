@@ -1,10 +1,11 @@
 const generateInput = (howMany) => {
+  // Generates howMany number of inputs
   let input = [];
   for (let i = 0; i < howMany; i++) {
     let startTime = Math.floor(Math.random() * 80000);
     input.push({
       startTime: startTime,
-      endTime: startTime + Math.floor(Math.random() * 10000),
+      endTime: Math.min(startTime + Math.floor(Math.random() * 10000), 86400),
       index: i,
     });
   }
@@ -12,10 +13,13 @@ const generateInput = (howMany) => {
 };
 
 function handleInput(events) {
+  // Returns an array of levels
   console.time("timeToSort");
   let levels = [{ level: 0, events: [] }];
 
+  // Sort events by endTime (ascending)
   events = events.sort((a, b) => a.endTime - b.endTime);
+
   const fillLevel = (events, level) => {
     // Returns an array of remaining events after it fills the given level
     let endPoint = events[0].endTime;
@@ -46,6 +50,7 @@ function handleInput(events) {
   };
 
   const checkEventOverlap = (event, levelEvent) => {
+    // Checks for all possible overlap cases and returns a boolean
     return (
       (event.startTime >= levelEvent.startTime &&
         event.startTime <= levelEvent.endTime) ||
@@ -56,6 +61,7 @@ function handleInput(events) {
     );
   };
 
+  // Core loop. It exits when all events have been placed.
   while (events.length > 0) {
     events = fillLevel(events, levels[levels.length - 1]);
     if (events.length !== 0) {

@@ -4,6 +4,7 @@ import { useState } from "react";
 export default function AddEventForm({ events, setEvents, setFormOpen }) {
   const [newEventStart, setNewEventStart] = useState("");
   const [newEventEnd, setNewEventEnd] = useState("");
+  const [error, setError] = useState(null);
 
   const handleStartChange = (e) => {
     setNewEventStart(e.target.value);
@@ -12,43 +13,49 @@ export default function AddEventForm({ events, setEvents, setFormOpen }) {
     setNewEventEnd(e.target.value);
   };
 
-  const addEvent = (e) => {
-    e.preventDefault();
-    console.log("button clicked", e.target);
-    // if (
-    //   newEventStart < 0 ||
-    //   newEventStart > 86399 ||
-    //   newEventEnd < 0 ||
-    //   newEventEnd > 86400 ||
-    //   newEventStart > newEventEnd
-    // ) {
-    //   alert(
-    //     "Numbers must be between 0 and 86399, and Finish must be larger than Start."
-    //   );
-    // } else {
-    setEvents([
-      ...events,
-      {
-        startTime: newEventStart,
-        endTime: newEventEnd,
-        index: events.length,
-      },
-    ]);
-    // }
+  const handleError = (e) => {
+    setError(e);
     setNewEventStart("");
     setNewEventEnd("");
-    setFormOpen(false);
+    setTimeout(() => {
+      setError(null);
+    }, 10000);
   };
 
-  return (
-    <form
-      className="flex flex-col items-center justify-center shadow-sm gap-2 rounded-md px-16 py-7 bg-white"
-      onSubmit={addEvent}
-    >
-      <input
-        className="form-control
+  const validateInput = (start, end) => {
+    if (start >= 0 && start <= 86399 && end > start && end <= 86400) {
+      return true;
+    }
+    return false;
+  };
+
+  const addEvent = (e) => {
+    e.preventDefault(e);
+    try {
+      let eventStart = parseInt(newEventStart);
+      let eventEnd = parseInt(newEventEnd);
+      if (!validateInput(eventStart, eventEnd))
+        throw "⚠️ Numbers must be between 0 and 86399, and End must be larger than Start. ⚠️";
+      setEvents([
+        ...events,
+        {
+          startTime: newEventStart,
+          endTime: newEventEnd,
+          index: events.length,
+        },
+      ]);
+      setNewEventStart("");
+      setNewEventEnd("");
+      setFormOpen(false);
+    } catch (e) {
+      return handleError(e);
+    }
+  };
+
+  let inputStyle = `
+        form-control
         block
-        w-full
+        w-42
         px-3
         py-1.5
         text-base
@@ -60,34 +67,34 @@ export default function AddEventForm({ events, setEvents, setFormOpen }) {
         transition
         ease-in-out
         m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-        value={newEventStart}
-        onChange={handleStartChange}
-        placeholder="Start"
-        required
-      />
-      <input
-        className="form-control
-        block
-        w-full
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-   
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-        value={newEventEnd}
-        onChange={handleEndChange}
-        placeholder="Finish"
-        required
-      />
-      <button
-        className="inline-block 
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+  `;
+
+  return (
+    <div className="form-wrapper flex flex-col items-center w-50">
+      {error && (
+        <div className="text-center text-red-400 w-2/5 py-2 pb-5">{error}</div>
+      )}
+      <form
+        className="flex flex-col items-center justify-center shadow-sm gap-2 rounded-md px-16 py-7 bg-white"
+        onSubmit={addEvent}
+      >
+        <input
+          className={`${inputStyle}`}
+          value={newEventStart}
+          onChange={handleStartChange}
+          placeholder="Start"
+          required
+        />
+        <input
+          className={`${inputStyle}`}
+          value={newEventEnd}
+          onChange={handleEndChange}
+          placeholder="End"
+          required
+        />
+        <button
+          className="inline-block 
         w-2/5
         px-4 
         py-2 
@@ -98,10 +105,11 @@ export default function AddEventForm({ events, setEvents, setFormOpen }) {
         rounded 
         bg-white
         focus:shadow-md focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg "
-        type="submit"
-      >
-        Add
-      </button>
-    </form>
+          type="submit"
+        >
+          Add
+        </button>
+      </form>
+    </div>
   );
 }
