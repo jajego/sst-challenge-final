@@ -14,7 +14,6 @@ const generateInput = (howMany) => {
 
 function handleInput(events) {
   // Returns an array of levels
-  console.time("timeToSort");
   let levels = [{ level: 0, events: [] }];
 
   // Sort events by endTime (ascending)
@@ -42,9 +41,8 @@ function handleInput(events) {
     for (let levelEvent of level.events) {
       if (checkEventOverlap(event, levelEvent)) {
         return true;
-      } else {
-        continue;
       }
+      continue;
     }
     return false;
   };
@@ -68,8 +66,6 @@ function handleInput(events) {
       levels.push({ level: levels.length, events: [] });
     }
   }
-
-  console.timeEnd("timeToSort");
   return levels;
 }
 

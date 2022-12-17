@@ -23,34 +23,30 @@ export default function AddEventForm({ events, setEvents, setFormOpen }) {
     }, 10000);
   };
 
-  const validateInput = (start, end) => {
-    if (start >= 0 && start <= 86399 && end > start && end <= 86400) {
-      return true;
-    }
-    return false;
-  };
+  const validateInput = (start, end) =>
+    start >= 0 && start <= 86399 && end > start && end <= 86400;
 
   const addEvent = (e) => {
     e.preventDefault(e);
-    try {
-      let eventStart = parseInt(newEventStart);
-      let eventEnd = parseInt(newEventEnd);
-      if (!validateInput(eventStart, eventEnd))
-        throw "⚠️ Numbers must be between 0 and 86399, and End must be larger than Start. ⚠️";
-      setEvents([
-        ...events,
-        {
-          startTime: newEventStart,
-          endTime: newEventEnd,
-          index: events.length,
-        },
-      ]);
-      setNewEventStart("");
-      setNewEventEnd("");
-      setFormOpen(false);
-    } catch (e) {
-      return handleError(e);
-    }
+
+    let eventStart = parseInt(newEventStart);
+    let eventEnd = parseInt(newEventEnd);
+    if (!validateInput(eventStart, eventEnd))
+      return handleError(
+        "⚠️ Numbers must be between 0 and 86399, and End must be larger than Start. ⚠️"
+      );
+
+    setEvents([
+      ...events,
+      {
+        startTime: newEventStart,
+        endTime: newEventEnd,
+        index: events.length,
+      },
+    ]);
+    setNewEventStart("");
+    setNewEventEnd("");
+    setFormOpen(false);
   };
 
   let inputStyle = `
