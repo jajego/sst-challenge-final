@@ -27,7 +27,7 @@ Method 1 scaled poorly because for each event it searched each level for a fit i
 *Method 2 performance*
 
 #### Method 3
-The final method and fastest method utilizes Method 2's approach, but also sorts the inputs by `endTime`. It then compares the first event in the list’s `endTime` to the next event’s `startTime`. If the next event starts before the first event ends, it pushes it to the level. It cycles through each event making this comparison, resulting in significantly better scaling.
+The final method and fastest method utilizes Method 2's approach, but also sorts the inputs by `endTime`. It then compares the first event in the list’s `endTime` to the next event’s `startTime`. If the next event starts before the first event ends, it pushes it to the level, and otherwise stores it for later. It cycles through each event making this comparison, resulting in significantly better scaling.
 
 ![Method 3 chart](https://i.imgur.com/2YF9kem.png)
 
