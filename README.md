@@ -1,9 +1,9 @@
-## How to start
+# How to start
 
 `npm install` →
 `npm start`
 
-## How to run tests (Jest)
+# How to run tests (Jest)
 
 `npm run test`
 
