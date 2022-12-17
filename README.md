@@ -19,7 +19,7 @@ To try and improve the algorithm, I used interval trees to represent each level 
 Method 1 scaled poorly because for each event it searched each level for a fit in a growing pool of levels. Instead, the algorithm could fill a base level with as many events as possible and create and fill new levels until each event was sorted. This approach outperformed the first method.
 
 #### Method 3 (Best)
-The final method and fastest method utilizes Method 2's approach, but also sorts the inputs by `endTime`. It then compares the first event in the list’s `endTime` to the next event’s `startTime`. If the next event starts before the first event ends, it pushes it to the level, and otherwise stores it for later. It cycles through each event making this comparison and finds fits for events earlier, resulting in fewer queries overall and significantly better scaling.
+The final method and fastest method utilizes Method 2's approach, but also sorts the inputs by `endTime`, increasing the odds that a given event in the list can fit next to its left neighbor. It then compares the first event in the list’s `endTime` to the next event’s `startTime`. If the next event starts before the first event ends, it pushes it to the level, and otherwise stores it for later. It cycles through each event making this comparison and finds fits for events earlier, resulting in fewer queries overall and significantly better scaling.
 
 ![Chart of all 3 methods](https://i.imgur.com/3ilmdbP.png)
 
