@@ -73,8 +73,6 @@ function handleInput(events) {
   return levels;
 }
 
-// handleInput(generateInput(1000000));
-
 module.exports = {
   generateInput,
   handleInput,
