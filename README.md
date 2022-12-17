@@ -39,8 +39,7 @@ The final method and fastest method utilizes Method 2's approach, but also sorts
 
 
 #### Conclusion
-Because of its speed, I chose Method 3 for this challenge. This was a fun and interesting technical problem to analyze, and it’s easy to see how it’s relevant to Surgical Safety Technology’s products. I look forward to discussing this challenge with your team, and learning more ways to approach it.
-
+I chose Method 3 because it has the same or better algorithmic complexity as the other two solutions, but showed 35% improved real performance.
 
 
 
