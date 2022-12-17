@@ -7,7 +7,7 @@
 
 `npm run test`
 
-# Rationale
+## Rationale
 
 ##### Method 1
 When first approaching this problem, I sorted the events using nested `for` loops. For every event, it iterated through each existing level until it found a match (or not). However, this did not scale well.
