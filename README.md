@@ -7,7 +7,7 @@
 
 `npm run test`
 
-## Rationale
+## Algorithm analysis
 
 ![Chart of all 3 methods](https://i.imgur.com/3ilmdbP.png)
 
