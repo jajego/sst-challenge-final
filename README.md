@@ -1,8 +1,8 @@
 ### How to build
 
-`npm install` --> 
+`npm install` →
 `npm start`
 
-### How to run tests
+### How to run tests (Jest)
 
 `npm run test`
