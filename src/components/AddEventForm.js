@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function AddEventForm({ events, setEvents, setFormOpen }) {
   const [newEventStart, setNewEventStart] = useState("");
@@ -17,6 +17,7 @@ export default function AddEventForm({ events, setEvents, setFormOpen }) {
     setError(e);
     setNewEventStart("");
     setNewEventEnd("");
+    document.getElementsByTagName("input")[0].focus();
     setTimeout(() => {
       setError(null);
     }, 10000);
@@ -84,6 +85,7 @@ export default function AddEventForm({ events, setEvents, setFormOpen }) {
           value={newEventStart}
           onChange={handleStartChange}
           placeholder="Start"
+          autoFocus
           required
         />
         <input

@@ -10,7 +10,11 @@ export default function Timeline({ levels }) {
       </div>
       {levels[0].events.length > 0 &&
         levels.map((level, i) => (
-          <Level level={level.level} events={levels[i].events} />
+          <Level
+            key={`level${i}`}
+            level={level.level}
+            events={levels[i].events}
+          />
         ))}
     </div>
   );

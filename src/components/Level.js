@@ -46,6 +46,7 @@ export default function Level({ level, events }) {
             endTime={event.endTime}
             index={event.index}
             color={color}
+            key={`event${i}`}
           />
         ))}
         <div className="line-container"></div>

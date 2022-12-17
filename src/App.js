@@ -9,7 +9,6 @@ function App() {
   const [levels, setLevels] = useState([]);
   const [formOpen, setFormOpen] = useState(false);
 
-  console.log(events);
   useEffect(() => {
     if (events.length > 0) {
       setLevels(handleInput(events));
