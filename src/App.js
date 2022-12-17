@@ -8,7 +8,7 @@ function App() {
   const [events, setEvents] = useState([]);
   const [levels, setLevels] = useState([]);
   const [formOpen, setFormOpen] = useState(false);
-
+  console.log(events);
   useEffect(() => {
     if (events.length > 0) {
       setLevels(handleInput(events));
@@ -18,7 +18,7 @@ function App() {
   const randomize = () => {
     setFormOpen(false);
 
-    return setEvents(generateInput(50));
+    return setEvents(generateInput(10000));
   };
 
   const resetTimeline = () => {

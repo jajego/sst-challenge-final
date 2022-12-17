@@ -15,20 +15,26 @@ function handleInput(events) {
   console.time("timeToSort");
   let levels = [{ level: 0, events: [] }];
 
+  events = events.sort((a, b) => a.endTime - b.endTime);
   const fillLevel = (events, level) => {
+    // Returns an array of remaining events after it fills the given level
+    let endPoint = events[0].endTime;
+    level.events.push(events[0]);
     let unplacedEvents = [];
-    for (let i = 0; i < events.length; i++) {
-      if (!checkLevelOverlap(events[i], level)) {
+    for (let i = 1; i < events.length; i++) {
+      let startPoint = events[i].startTime;
+      if (startPoint >= endPoint) {
         level.events.push(events[i]);
+        endPoint = events[i].endTime;
       } else {
         unplacedEvents.push(events[i]);
       }
     }
-
     return unplacedEvents;
   };
 
   const checkLevelOverlap = (event, level) => {
+    // Checks each event in a level for overlap with a given event and exits the loop if it finds it
     for (let levelEvent of level.events) {
       if (checkEventOverlap(event, levelEvent)) {
         return true;
@@ -61,7 +67,7 @@ function handleInput(events) {
   return levels;
 }
 
-handleInput(generateInput(100000));
+// handleInput(generateInput(1000000));
 
 module.exports = {
   generateInput,
