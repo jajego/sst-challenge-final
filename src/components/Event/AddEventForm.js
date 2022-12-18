@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function AddEventForm({ events, setEvents, setFormOpen }) {
   const [newEventStart, setNewEventStart] = useState("");
